@@ -1,0 +1,41 @@
+<!-- Next Steps -->
+<h2>Next Steps</h2>
+
+<input type="hidden" #selection>
+
+<div class="card-container">
+
+    <form nz-form [formGroup]="validateForm" class="message-form" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input Id!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="id" placeholder="Id" [disabled]="formMode == true" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Message!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="text" nz-input formControlName="message" placeholder="Message" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="message-form-button message-form-margin" [nzType]="'primary'">
+            <div *ngIf="formMode; else elseBlock">Create</div>
+            <ng-template #elseBlock>Edit</ng-template>
+        </button>
+        <button nz-button (click)="clearForm()">Clear</button>
+    </form>
+
+</div>
+
+<div class="card-container" *ngFor="let item of messages">
+
+    <div tabindex="0">
+        <div>Id = {{item.id}}</div>
+        <div>Message = {{item.message}}</div>
+        <button nz-button nzType="default" (click)="deleteMessage(item.id)" nzDanger>Delete</button>
+        <button nz-button nzType="default" (click)="editMessage(item)">Edit</button>
+    </div>
+
+</div>
