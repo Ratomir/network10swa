@@ -292,6 +292,11 @@
       visibility: hidden;
     }
   }
+
+  [nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
+  }
 </style>
 
 <!-- Toolbar -->
@@ -412,13 +417,39 @@
 
   <input type="hidden" #selection>
 
+  <div class="card-container">
+
+    <form nz-form [formGroup]="validateForm" class="message-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input Id!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="id" placeholder="Id" [disabled]="formMode == true" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Message!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="text" nz-input formControlName="message" placeholder="Message" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+        <div *ngIf="formMode; else elseBlock">Create</div>
+        <ng-template #elseBlock>Edit</ng-template>
+      </button>
+      <button nz-button (click)="clearForm()">Clear</button>
+    </form>
+
+  </div>
+
   <div class="card-container" *ngFor="let item of messages">
 
     <div tabindex="0">
       <div>{{item.id}}</div>
       <div>{{item.message}}</div>
-      <button type="button" class="delete" ng-click="deleteMessage(item.id)">Delete</button>
-      <button type="button" class="delete" ng-click="editMessage(item.id)">Edit</button>
+      <button nz-button nzType="default" (click)="deleteMessage(item.id)" nzDanger>Delete</button>
+      <button nz-button nzType="default" (click)="editMessage(item)">Edit</button>
     </div>
 
   </div>
