@@ -8,10 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfigurationComponent } from './components/configuration/configuration.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfigurationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
